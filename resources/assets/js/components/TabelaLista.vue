@@ -1,6 +1,12 @@
 <template>
     <div>
-        <a v-if="criar" v-bind:href="criar">Criar</a>
+        <div class="form-imline">
+            <a v-if="criar" v-bind:href="criar">Criar</a>
+            <div class="form-group pull-right">  
+                <input type="search" class="form-control" placeholder="Buscar" v-model="buscar">               
+
+            </div>          
+         </div>   
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -9,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in itens" v-bind:key="index">
+                <tr v-for="(item, index) in lista" v-bind:key="index">
                     <td v-for="(i, index) in item" v-bind:key="index">{{ i }}</td>
 
                     <td v-if="detalhe || editar || deletar">
@@ -44,10 +50,31 @@
 <script>
     export default {
         props: ['titulos', 'itens', 'criar', 'detalhe', 'editar', 'deletar', 'token' ],
+        data: function(){
+            return{
+                buscar:'',
+            }
+        },
         methods: {
             executaForm: function(index){
                 document.getElementById('index').submit();
             }
         },
+        computed: {
+            lista:function(){
+                return this.itens.filter(res => {
+                    for(let k = 0; k < res.length; k++){
+                        if((res[k] + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0){
+                            return true;
+                        }
+                    }
+                    return false;
+                    
+                });
+
+
+                return this.itens;
+            }
+        }
     }
 </script>
