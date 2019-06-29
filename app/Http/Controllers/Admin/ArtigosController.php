@@ -14,7 +14,18 @@ class ArtigosController extends Controller
      */
     public function index()
     {
-        return view('admin.artigos.index');
+        $listaMigalhas = json_encode([
+          ["titulo"=>"Home","url"=>route('home')],
+          ["titulo"=>"Lista de artigos","url"=>""]
+        ]);
+
+        $listadeArtigos = json_encode([
+            ["id"=>1,"titulo"=>"PHP OO","descricao"=>"Curso de php oo"],
+            ["id"=>2,"titulo"=>"VUE JS","descricao"=>"Curso de Vue JS"],
+          ]);
+
+
+        return view('admin.artigos.index',compact('listaMigalhas', 'listadeArtigos'));
     }
 
     /**
