@@ -2,6 +2,22 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import Vuex from 'Vuex';
+Vue.Use(Vuex);
+
+
+//VUEX
+
+const store = new Vuex.Store({
+    state:{
+        itens:{teste:"Opa funcionou"}
+    },
+    mutations:{
+        setitens(state,obj){
+            state.itens = obj;
+        }
+    }
+});
 
 Vue.component('topo', require('./components/Topo.vue'));
 Vue.component('painel', require('./components/Painel.vue'));
@@ -14,5 +30,6 @@ Vue.component('modallink', require('./components/modal/ModalLink.vue'));
 Vue.component('formulario', require('./components/Formulario.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store
 });
