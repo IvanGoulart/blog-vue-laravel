@@ -2,22 +2,25 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import Vuex from 'Vuex';
-Vue.Use(Vuex);
+import Vuex from 'vuex';
+Vue.use(Vuex);
+
 
 
 //VUEX
 
 const store = new Vuex.Store({
     state:{
-        itens:{teste:"Opa funcionou"}
+        itens:{teste:"opa funcionou"}
     },
     mutations:{
-        setitens(state,obj){
+        setItens(state,obj){
             state.itens = obj;
         }
     }
 });
+
+
 
 Vue.component('topo', require('./components/Topo.vue'));
 Vue.component('painel', require('./components/Painel.vue'));
