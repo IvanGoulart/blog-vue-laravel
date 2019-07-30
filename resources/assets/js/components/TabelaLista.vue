@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="form-imline">
-      <p>{{this.$store.state.itens}}</p>
+
       <a v-if="criar && !modal" v-bind:href="criar">Criar</a>
         <modallink v-if="criar && modal" tipo="link" nome="adicionar" titulo="Criar" css=""></modallink>
 
@@ -32,7 +32,7 @@
 
               <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
               <a v-if="editar && !modal" v-bind:href="editar">Editar |</a>
-              <modallink v-if="editar && modal" tipo="link" nome="editar" titulo="Editar |" css=""></modallink>
+              <modallink v-if="editar && modal" v-bind:item="item" tipo="link" nome="editar" titulo="Editar |" css=""></modallink>
 
 
 
@@ -94,8 +94,6 @@ export default {
   },
   computed: {
     lista: function() {
-
-      this.$store.commit('setItens', {opa:"OK"});
 
       let ordem = this.ordemAux;
       let ordemCol = this.ordemAuxCol;

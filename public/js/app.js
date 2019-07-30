@@ -1403,11 +1403,11 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */]);
 
 var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
     state: {
-        itens: { teste: "opa funcionou" }
+        item: {}
     },
     mutations: {
-        setItens: function setItens(state, obj) {
-            state.itens = obj;
+        setItem: function setItem(state, obj) {
+            state.item = obj;
         }
     }
 });
@@ -46688,8 +46688,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     lista: function lista() {
       var _this = this;
 
-      this.$store.commit('setItens', { opa: "OK" });
-
       var ordem = this.ordemAux;
       var ordemCol = this.ordemAuxCol;
       ordem = ordem.toLowerCase();
@@ -46746,8 +46744,6 @@ var render = function() {
       "div",
       { staticClass: "form-imline" },
       [
-        _c("p", [_vm._v(_vm._s(this.$store.state.itens))]),
-        _vm._v(" "),
         _vm.criar && !_vm.modal
           ? _c("a", { attrs: { href: _vm.criar } }, [_vm._v("Criar")])
           : _vm._e(),
@@ -46871,6 +46867,7 @@ var render = function() {
                             _vm.editar && _vm.modal
                               ? _c("modallink", {
                                   attrs: {
+                                    item: item,
                                     tipo: "link",
                                     nome: "editar",
                                     titulo: "Editar |",
@@ -47266,9 +47263,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['tipo', 'nome', 'titulo', 'css']
+  props: ['tipo', 'nome', 'titulo', 'css', 'item'],
+  methods: {
+    preencheFormulario: function preencheFormulario() {
+      this.$store.commit('setItem', this.item);
+    }
+  }
 });
 
 /***/ }),
@@ -47280,49 +47295,118 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("span", [
-    !_vm.tipo || (_vm.tipo != "button" && _vm.tipo != "link")
-      ? _c(
-          "button",
-          {
-            class: _vm.css || "btn btn-primary",
-            attrs: {
-              type: "button",
-              "data-toggle": "modal",
-              "data-target": "#" + _vm.nome
-            }
-          },
-          [_vm._v(_vm._s(_vm.titulo))]
-        )
+    _vm.item
+      ? _c("span", [
+          !_vm.tipo || (_vm.tipo != "button" && _vm.tipo != "link")
+            ? _c(
+                "button",
+                {
+                  class: _vm.css || "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.preencheFormulario()
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tipo == "button"
+            ? _c(
+                "button",
+                {
+                  class: _vm.css || "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.preencheFormulario()
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tipo == "link"
+            ? _c(
+                "a",
+                {
+                  class: _vm.css || "",
+                  attrs: {
+                    href: "#",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.preencheFormulario()
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e()
+        ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.tipo == "button"
-      ? _c(
-          "button",
-          {
-            class: _vm.css || "btn btn-primary",
-            attrs: {
-              type: "button",
-              "data-toggle": "modal",
-              "data-target": "#" + _vm.nome
-            }
-          },
-          [_vm._v(_vm._s(_vm.titulo))]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.tipo == "link"
-      ? _c(
-          "a",
-          {
-            class: _vm.css || "",
-            attrs: {
-              href: "#",
-              "data-toggle": "modal",
-              "data-target": "#" + _vm.nome
-            }
-          },
-          [_vm._v(_vm._s(_vm.titulo))]
-        )
+    !_vm.item
+      ? _c("span", [
+          !_vm.tipo || (_vm.tipo != "button" && _vm.tipo != "link")
+            ? _c(
+                "button",
+                {
+                  class: _vm.css || "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tipo == "button"
+            ? _c(
+                "button",
+                {
+                  class: _vm.css || "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tipo == "link"
+            ? _c(
+                "a",
+                {
+                  class: _vm.css || "",
+                  attrs: {
+                    href: "#",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  },
+                  on: { click: _vm.preencheFormulario }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e()
+        ])
       : _vm._e()
   ])
 }

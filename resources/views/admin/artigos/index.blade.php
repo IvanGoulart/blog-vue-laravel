@@ -43,11 +43,11 @@
       <formulario css="" action="#" method="put" enctype="" token="">
         <div class="form-group">
           <label for="exampleInputEmail1">Título</label>
-          <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
+          <input type="text" class="form-control" id="titulo" name="titulo" v-model="$store.state.item.titulo" placeholder="Título">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Descrição</label>
-          <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
+          <input type="text" class="form-control" id="descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição">
         </div>
 
         <button class="btn btn-info">Atualizar</button>
