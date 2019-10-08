@@ -1391,25 +1391,37 @@ module.exports = __webpack_require__(75);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_Vuex__ = __webpack_require__(42);
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
 
 __webpack_require__(14);
 
 window.Vue = __webpack_require__(38);
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_Vuex__["a" /* default */]);
 
-//VUEX
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
-var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
-    state: {
-        item: {}
-    },
-    mutations: {
-        setItem: function setItem(state, obj) {
-            state.item = obj;
-        }
+//Vuex
+
+var store = new __WEBPACK_IMPORTED_MODULE_0_Vuex__["a" /* default */].Store({
+  state: {
+    item: {}
+  },
+  mutations: {
+    setItem: function setItem(state, obj) {
+      state.item = obj;
     }
+  }
 });
 
 Vue.component('topo', __webpack_require__(43));
@@ -1423,8 +1435,8 @@ Vue.component('modallink', __webpack_require__(69));
 Vue.component('formulario', __webpack_require__(72));
 
 var app = new Vue({
-    el: '#app',
-    store: store
+  el: '#app',
+  store: store
 });
 
 /***/ }),
@@ -46504,7 +46516,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tamanho"],
+  props: ['tamanho'],
   computed: {
     defineTamanho: function defineTamanho() {
       if (this.tamanho >= 12) {
@@ -46516,10 +46528,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.tamanho % 2 == 0) {
         return "col-md-" + this.tamanho + " col-md-offset-" + (12 - this.tamanho) / 2;
       } else {
-        return "col-md-" + (parseInt(this.tamanho) + 1) + " col-md-offset-" + (12 - parseInt(this.tamanho) / 2);
+        return "col-md-" + (parseInt(this.tamanho) + 1) + " col-md-offset-" + (12 - (parseInt(this.tamanho) + 1)) / 2;
       }
-
-      return "col-md-10 col-md-offset-1";
     }
   }
 });
@@ -46670,24 +46680,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["titulos", "itens", "ordem", "ordemcol", "criar", "detalhe", "editar", "deletar", "token", "modal"],
+  props: ['titulos', 'itens', 'ordem', 'ordemcol', 'criar', 'detalhe', 'editar', 'deletar', 'token', 'modal'],
   data: function data() {
     return {
-      buscar: "",
+      buscar: '',
       ordemAux: this.ordem || "asc",
       ordemAuxCol: this.ordemcol || 0
     };
   },
   methods: {
     executaForm: function executaForm(index) {
-      document.getElementById("index").submit();
+      document.getElementById(index).submit();
     },
     ordenaColuna: function ordenaColuna(coluna) {
       this.ordemAuxCol = coluna;
       if (this.ordemAux.toLowerCase() == "asc") {
-        this.ordemAux = "desc";
+        this.ordemAux = 'desc';
       } else {
-        this.ordemAux = "asc";
+        this.ordemAux = 'asc';
       }
     }
   },
@@ -46700,22 +46710,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       ordem = ordem.toLowerCase();
       ordemCol = parseInt(ordemCol);
 
-      if (ordem == "desc") {
+      if (ordem == "asc") {
         this.itens.sort(function (a, b) {
-          if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
+          if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
             return 1;
           }
-          if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
+          if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
             return -1;
           }
           return 0;
         });
       } else {
         this.itens.sort(function (a, b) {
-          if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
+          if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
             return 1;
           }
-          if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
+          if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
             return -1;
           }
           return 0;
@@ -46724,6 +46734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (this.buscar) {
         return this.itens.filter(function (res) {
+          res = Object.values(res);
           for (var k = 0; k < res.length; k++) {
             if ((res[k] + "").toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
               return true;
@@ -46749,7 +46760,7 @@ var render = function() {
   return _c("div", [
     _c(
       "div",
-      { staticClass: "form-imline" },
+      { staticClass: "form-inline" },
       [
         _vm.criar && !_vm.modal
           ? _c("a", { attrs: { href: _vm.criar } }, [_vm._v("Criar")])
@@ -46802,7 +46813,6 @@ var render = function() {
               return _c(
                 "th",
                 {
-                  key: index,
                   staticStyle: { cursor: "pointer" },
                   on: {
                     click: function($event) {
@@ -46827,10 +46837,9 @@ var render = function() {
         _vm._l(_vm.lista, function(item, index) {
           return _c(
             "tr",
-            { key: index },
             [
-              _vm._l(item, function(i, index) {
-                return _c("td", { key: index }, [_vm._v(_vm._s(i))])
+              _vm._l(item, function(i) {
+                return _c("td", [_vm._v(_vm._s(i))])
               }),
               _vm._v(" "),
               _vm.detalhe || _vm.editar || _vm.deletar
@@ -46871,7 +46880,7 @@ var render = function() {
                                     item: item,
                                     tipo: "link",
                                     nome: "detalhe",
-                                    titulo: "Detalhe |",
+                                    titulo: " Detalhe |",
                                     css: ""
                                   }
                                 })
@@ -46879,7 +46888,7 @@ var render = function() {
                             _vm._v(" "),
                             _vm.editar && !_vm.modal
                               ? _c("a", { attrs: { href: _vm.editar } }, [
-                                  _vm._v("Editar |")
+                                  _vm._v(" Editar |")
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
@@ -46889,7 +46898,7 @@ var render = function() {
                                     item: item,
                                     tipo: "link",
                                     nome: "editar",
-                                    titulo: "Editar |",
+                                    titulo: " Editar |",
                                     css: ""
                                   }
                                 })
@@ -46901,11 +46910,11 @@ var render = function() {
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.executaform(index)
+                                    return _vm.executaForm(index)
                                   }
                                 }
                               },
-                              [_vm._v("Deletar")]
+                              [_vm._v(" Deletar")]
                             )
                           ],
                           1
@@ -46928,7 +46937,7 @@ var render = function() {
                                     item: item,
                                     tipo: "link",
                                     nome: "detalhe",
-                                    titulo: "Detalhe |",
+                                    titulo: " Detalhe |",
                                     css: ""
                                   }
                                 })
@@ -46936,7 +46945,7 @@ var render = function() {
                             _vm._v(" "),
                             _vm.editar && !_vm.modal
                               ? _c("a", { attrs: { href: _vm.editar } }, [
-                                  _vm._v("Editar |")
+                                  _vm._v(" Editar |")
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
@@ -46945,7 +46954,7 @@ var render = function() {
                                   attrs: {
                                     tipo: "link",
                                     nome: "editar",
-                                    titulo: "Editar |",
+                                    titulo: " Editar |",
                                     css: ""
                                   }
                                 })
@@ -46953,7 +46962,7 @@ var render = function() {
                             _vm._v(" "),
                             _vm.deletar
                               ? _c("a", { attrs: { href: _vm.deletar } }, [
-                                  _vm._v("Deletar")
+                                  _vm._v(" Deletar")
                                 ])
                               : _vm._e()
                           ],
@@ -46961,7 +46970,7 @@ var render = function() {
                         )
                       : _vm._e(),
                     _vm._v(" "),
-                    !_vm.token && !_vm.deletar
+                    _vm.token && !_vm.deletar
                       ? _c(
                           "span",
                           [
@@ -46977,7 +46986,7 @@ var render = function() {
                                     item: item,
                                     tipo: "link",
                                     nome: "detalhe",
-                                    titulo: "Detalhe |",
+                                    titulo: " Detalhe |",
                                     css: ""
                                   }
                                 })
@@ -46985,7 +46994,7 @@ var render = function() {
                             _vm._v(" "),
                             _vm.editar && !_vm.modal
                               ? _c("a", { attrs: { href: _vm.editar } }, [
-                                  _vm._v("Editar |")
+                                  _vm._v(" Editar")
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
@@ -46994,16 +47003,10 @@ var render = function() {
                                   attrs: {
                                     tipo: "link",
                                     nome: "editar",
-                                    titulo: ">Editar |",
+                                    titulo: " Editar",
                                     css: ""
                                   }
                                 })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.deletar
-                              ? _c("a", { attrs: { href: _vm.deletar } }, [
-                                  _vm._v("Deletar")
-                                ])
                               : _vm._e()
                           ],
                           1
@@ -47200,9 +47203,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['nome']
+  props: ['nome', 'titulo']
 
 });
 
@@ -47218,23 +47237,62 @@ var render = function() {
     "div",
     {
       staticClass: "modal fade",
-      attrs: {
-        id: _vm.nome,
-        tabindex: "-1",
-        role: "dialog",
-        "aria-labelledby": _vm.nome
-      }
+      attrs: { id: _vm.nome, tabindex: "-1", role: "dialog" }
     },
     [
-      _c(
-        "div",
-        { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
-        [_c("div", { staticClass: "modal-content" }, [_vm._t("default")], 2)]
-      )
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "modal-header" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("h4", { staticClass: "modal-title" }, [
+              _vm._v(_vm._s(_vm.titulo))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [_vm._t("default")], 2),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "modal-footer" },
+            [
+              _vm._t("botoes"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Close")]
+              )
+            ],
+            2
+          )
+        ])
+      ])
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47297,10 +47355,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
 //
 //
 //
@@ -47443,8 +47497,7 @@ var render = function() {
                     href: "#",
                     "data-toggle": "modal",
                     "data-target": "#" + _vm.nome
-                  },
-                  on: { click: _vm.preencheFormulario }
+                  }
                 },
                 [_vm._v(_vm._s(_vm.titulo))]
               )
@@ -47525,31 +47578,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['css', 'action', 'method', 'enctype', 'token'],
-    data: function data() {
-        return {
-            alterMethod: ""
-        };
-    },
-    computed: {
-        defineMethod: function defineMethod() {
-            if (this.method.toLowerCase() == "post" || this.method.toLowerCase() == "get") {
-                return this.method.toLowerCase();
-            }
+  props: ['css', 'action', 'method', 'enctype', 'token'],
+  data: function data() {
+    return {
+      alterMethod: ""
+    };
+  },
+  computed: {
+    defineMethod: function defineMethod() {
+      if (this.method.toLowerCase() == "post" || this.method.toLowerCase() == "get") {
+        return this.method.toLowerCase();
+      }
 
-            if (this.method.toLowerCase() == "put") {
-                this.alterMethod = "put";
-            }
+      if (this.method.toLowerCase() == "put") {
+        this.alterMethod = "put";
+      }
+      if (this.method.toLowerCase() == "delete") {
+        this.alterMethod = "delete";
+      }
 
-            if (this.method.toLowerCase() == "delete") {
-                this.alterMethod = "delete";
-            }
-
-            return "post";
-        }
+      return "post";
     }
+  }
 });
 
 /***/ }),

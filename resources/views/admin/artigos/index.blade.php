@@ -9,7 +9,7 @@
 
       <tabela-lista
       v-bind:titulos="['#','Título','Descrição']"
-      v-bind:itens="{{$listadeArtigos}}"
+      v-bind:itens="{{$listaArtigos}}"
       ordem="desc" ordemcol="1"
       criar="#criar" detalhe="#detalhe" editar="#editar" deletar="#deletar" token="7887522323"
       modal="sim"
@@ -20,46 +20,45 @@
 
   </pagina>
 
-  <modal nome="adicionar">
-    <painel titulo="Adicionar">
-      <formulario css="" action="#" method="put" enctype="" token="">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Título</label>
-          <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Descrição</label>
-          <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
-        </div>
+  <modal nome="adicionar" titulo="Adicionar">
+    
+  <formulario id="formAdicionar" css="" action="#" method="put" enctype="multipart/form-data" token="12345">
 
-        <button class="btn btn-info">Adicionar</button>
-      </form>
-    </formulario>
-    </painel>
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
+      </div>
+     
+  </formulario>
+  <span slot="botoes">
+      <button form="formAdicionar" class="btn btn-info">Adicionar</button>
+  
+  
+  </span>
   </modal>
+  <modal nome="editar" titulo="Editar">
+  <formulario id="formEditar" css="" action="#" method="put" enctype="multipart/form-data" token="12345">
 
-  <modal nome="editar">
-    <painel titulo="Editar">
-      <formulario css="" action="#" method="put" enctype="" token="">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Título</label>
-          <input type="text" class="form-control" id="titulo" name="titulo" v-model="$store.state.item.titulo" placeholder="Título">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Descrição</label>
-          <input type="text" class="form-control" id="descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição">
-        </div>
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" v-model="$store.state.item.titulo" placeholder="Título">
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control" id="descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição">
+      </div>
+      
+  </formulario>
 
-        <button class="btn btn-info">Atualizar</button>
-      </form>
-    </formulario>
-    </painel>
+  <span slot="botoes">
+      <button form="formEditar" class="btn btn-info">Atualizar</button>
+  </span>
   </modal>
-
-  <modal nome="detalhe">
-    <painel v-bind:titulo="$store.state.item.titulo">
+  <modal nome="detalhe" v-bind:titulo="$store.state.item.titulo">
       <p>@{{$store.state.item.descricao}}</p>
-    </painel>
   </modal>
-
 @endsection
