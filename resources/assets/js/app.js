@@ -43,5 +43,10 @@ Vue.component('formulario', require('./components/Formulario.vue'));
 
 const app = new Vue({
     el: '#app',
-    store
+    store,
+    mounted:function() {
+      console.log("OK");
+      document.getElementById('app').style.display = "block";
+      
+    },
 });
