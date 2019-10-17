@@ -2,6 +2,18 @@
 
 @section('content')
   <pagina tamanho="12">
+
+      @if($errors->all())
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          @foreach ($errors->all() as $key => $value)
+            <strong><li>{{$value}}</li></strong>
+          @endforeach
+        </div>
+         
+      @endif
+
+     
     <painel titulo="Lista de Artigos">
       <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
 
@@ -26,23 +38,23 @@
 
       <div class="form-group">
         <label for="titulo">Título</label>
-        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
+        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" value="{{old('titulo')}}">
       </div>
       <div class="form-group">
         <label for="descricao">Descrição</label>
-        <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
+        <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição" value="{{old('descricao')}}">
       </div>
 
       <div class="form-group">
         <label for="conteudo">Conteudo</label>
-        <textarea  class="form-control" id="conteudo" name="conteudo"></textarea> 
+        <textarea  class="form-control" id="conteudo" name="conteudo">{{old('conteudo')}}</textarea> 
       </div>
 
 
 
       <div class="form-group">
         <label for="data">Data</label>
-        <input type="datetime-local" class="form-control" id="data" name="data">
+        <input type="datetime-local" class="form-control" id="data" name="data" value="{{old('data')}}">
       </div>
      
   </formulario>
