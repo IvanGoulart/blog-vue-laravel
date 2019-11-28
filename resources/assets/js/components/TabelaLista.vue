@@ -22,7 +22,7 @@
           <td v-for="i in item">{{i}}</td>
 
           <td v-if="detalhe || editar || deletar">
-            <form v-bind:id="index" v-if="deletar && token" v-bind:action="deletar" method="post">
+            <form v-bind:id="index" v-if="deletar && token" v-bind:action="deletar + item.id" method="post">
               <input type="hidden" name="_method" value="DELETE">
               <input type="hidden" name="_token" v-bind:value="token">
 
@@ -31,7 +31,7 @@
 
 
               <a v-if="editar && !modal" v-bind:href="editar"> Editar |</a>
-              <modallink v-if="editar && modal" v-bind:item="item" tipo="link" nome="editar" titulo=" Editar |" css=""></modallink>
+              <modallink v-if="editar && modal" v-bind:item="item" v-bind:url="editar" tipo="link" nome="editar" titulo=" Editar |" css=""></modallink>
 
               <a href="#" v-on:click="executaForm(index)"> Deletar</a>
 
@@ -41,7 +41,7 @@
               <modallink v-if="detalhe && modal" v-bind:item="item" v-bind:url="detalhe" tipo="link" nome="detalhe" titulo=" Detalhe |" css=""></modallink>
 
               <a v-if="editar && !modal" v-bind:href="editar"> Editar |</a>
-              <modallink v-if="editar && modal" tipo="link" nome="editar" titulo=" Editar |" css=""></modallink>
+              <modallink v-if="editar && modal" tipo="link" v-bind:item="item" v-bind:url="editar" nome="editar" titulo=" Editar |" css=""></modallink>
               <a v-if="deletar" v-bind:href="deletar"> Deletar</a>
             </span>
             <span v-if="token && !deletar">
@@ -49,7 +49,7 @@
               <modallink v-if="detalhe && modal" v-bind:item="item" v-bind:url="detalhe" tipo="link" nome="detalhe" titulo=" Detalhe |" css=""></modallink>
 
               <a v-if="editar && !modal" v-bind:href="editar"> Editar</a>
-              <modallink v-if="editar && modal" tipo="link" nome="editar" titulo=" Editar" css=""></modallink>
+              <modallink v-if="editar && modal" tipo="link" v-bind:item="item" v-bind:url="editar" nome="editar" titulo=" Editar" css=""></modallink>
             </span>
 
 
@@ -90,20 +90,20 @@
       },
       computed:{
         lista:function(){
-
+          let lista = this.itens.data;
           let ordem = this.ordemAux;
           let ordemCol = this.ordemAuxCol;
           ordem = ordem.toLowerCase();
           ordemCol = parseInt(ordemCol);
 
           if(ordem == "asc"){
-            this.itens.sort(function(a,b){
+            lista.sort(function(a,b){
               if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol] ) { return 1;}
               if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol] ) { return -1;}
               return 0;
             });
           }else{
-            this.itens.sort(function(a,b){
+            lista.sort(function(a,b){
               if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol] ) { return 1;}
               if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol] ) { return -1;}
               return 0;
@@ -111,7 +111,7 @@
           }
 
           if(this.buscar){
-            return this.itens.filter(res => {
+            return lista.filter(res => {
               res = Object.values(res);
               for(let k = 0;k < res.length; k++){
                 if((res[k] + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0){
@@ -124,7 +124,7 @@
           }
 
 
-          return this.itens;
+          return lista;
         }
       }
     }

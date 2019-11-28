@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Artigo;
-use Illuminate\Support\Facades\Validator;
 
 class ArtigosController extends Controller
 {
@@ -21,7 +21,7 @@ class ArtigosController extends Controller
           ["titulo"=>"Lista de artigos","url"=>""]
         ]);
 
-        $listaArtigos = json_encode(Artigo::select('id','titulo','descricao','data')->get());
+        $listaArtigos = Artigo::select('id','titulo','descricao','data')->paginate(2);
 
 
         return view('admin.artigos.index',compact('listaMigalhas','listaArtigos'));
@@ -45,25 +45,20 @@ class ArtigosController extends Controller
      */
     public function store(Request $request)
     {
-
         $data = $request->all();
-        $validacao = validator::make($data, [
-            "titulo" => "required",
-            "descricao" => "required",
-            "conteudo" => "required",
-            "data" => "required"
-
+        $validacao = \Validator::make($data,[
+          "titulo" => "required",
+          "descricao" => "required",
+          "conteudo" => "required",
+          "data" => "required",
         ]);
-            if($validacao->fails()){
-                return redirect()->back()->withErrors($validacao)->withInput();
-            }
 
-       
+        if($validacao->fails()){
+          return redirect()->back()->withErrors($validacao)->withInput();
+        }
+
         Artigo::create($data);
-
-        //Redireciona para a pagina que fez a requisição
         return redirect()->back();
-
     }
 
     /**
@@ -97,7 +92,20 @@ class ArtigosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $data = $request->all();
+      $validacao = \Validator::make($data,[
+        "titulo" => "required",
+        "descricao" => "required",
+        "conteudo" => "required",
+        "data" => "required",
+      ]);
+
+      if($validacao->fails()){
+        return redirect()->back()->withErrors($validacao)->withInput();
+      }
+
+      Artigo::find($id)->update($data);
+      return redirect()->back();
     }
 
     /**
@@ -108,6 +116,7 @@ class ArtigosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Artigo::find($id)->delete();
+        return redirect()->back();
     }
 }
