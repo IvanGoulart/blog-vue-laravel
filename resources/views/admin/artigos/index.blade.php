@@ -26,7 +26,7 @@
 
       ></tabela-lista>
       <div align="center">
-        {{$listaArtigos->links()}}
+        {{$listaArtigos}}
       </div>
     </painel>
 
