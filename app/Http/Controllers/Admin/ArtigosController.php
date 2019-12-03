@@ -21,7 +21,7 @@ class ArtigosController extends Controller
           ["titulo"=>"Lista de artigos","url"=>""]
         ]);
 
-        $listaArtigos = Artigo::select('id','titulo','descricao','data')->paginate(2);
+        $listaArtigos = Artigo::select('id','titulo','descricao','data')->paginate(5);
 
 
         return view('admin.artigos.index',compact('listaMigalhas','listaArtigos'));
