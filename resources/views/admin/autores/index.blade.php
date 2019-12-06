@@ -20,7 +20,7 @@
       v-bind:titulos="['#','Nome','E-mail']"
       v-bind:itens="{{json_encode($listaModelo)}}"
       ordem="desc" ordemcol="1"
-      criar="#criar" detalhe="/admin/autores/" editar="/admin/usuarios/" 
+      criar="#criar" detalhe="/admin/autores/" editar="/admin/autores/"
       modal="sim"
 
       ></tabela-lista>
@@ -43,12 +43,13 @@
         <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" value="{{old('email')}}">
       </div>
       <div class="form-group">
-        <label for="email">Autor</label>
+        <label for="autor">Autor</label>
         <select class="form-control" id="autor" name="autor">
-          <option {{(old('autor') && old('autor') == 'N' ? 'selected' : '')}} value="N">Não</option>
-          <option {{(old('autor') && old('autor') == 'S' ? 'selected' : '')}} value="S">Sim</option>
+          <option {{(old('autor') && old('autor') == 'N' ? 'selected' : '' )}} value="N">Não</option>
+          <option {{(old('autor') && old('autor') == 'S' ? 'selected' : ''  )}} {{(!old('autor') ? 'selected' : ''  )}} value="S">Sim</option>
         </select>
       </div>
+
       <div class="form-group">
         <label for="password">Senha</label>
         <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}">
@@ -72,10 +73,10 @@
         <input type="email" class="form-control" id="email" name="email" v-model="$store.state.item.email" placeholder="E-mail">
       </div>
       <div class="form-group">
-        <label for="email">Autor</label>
+        <label for="autor">Autor</label>
         <select class="form-control" id="autor" name="autor" v-model="$store.state.item.autor">
-          <option  value="N">Não</option>
-          <option  value="S">Sim</option>
+          <option value="N">Não</option>
+          <option value="S">Sim</option>
         </select>
       </div>
       <div class="form-group">

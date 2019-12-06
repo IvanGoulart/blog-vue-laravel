@@ -44,10 +44,10 @@
       </div>
 
       <div class="form-group">
-        <label for="email">Autor</label>
+        <label for="autor">Autor</label>
         <select class="form-control" id="autor" name="autor">
-          <option {{(old('autor') && old('autor') == 'N' ? 'selected' : '')}} value="N">Não</option>
-          <option {{(old('autor') && old('autor') == 'S' ? 'selected' : '')}} value="S">Sim</option>
+          <option {{(old('autor') && old('autor') == 'N' ? 'selected' : '' )}} value="N">Não</option>
+          <option {{(old('autor') && old('autor') == 'S' ? 'selected' : ''  )}} value="S">Sim</option>
         </select>
       </div>
 
@@ -74,10 +74,10 @@
         <input type="email" class="form-control" id="email" name="email" v-model="$store.state.item.email" placeholder="E-mail">
       </div>
       <div class="form-group">
-        <label for="email">Autor</label>
+        <label for="autor">Autor</label>
         <select class="form-control" id="autor" name="autor" v-model="$store.state.item.autor">
-          <option  value="N">Não</option>
-          <option  value="S">Sim</option>
+          <option value="N">Não</option>
+          <option value="S">Sim</option>
         </select>
       </div>
       <div class="form-group">

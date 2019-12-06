@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use App\User;
 use Illuminate\Validation\Rule;
 
@@ -17,15 +16,15 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        $listaMigalhas = json_encode([
-            ["titulo"=>"Home","url"=>route('home')],
-            ["titulo"=>"Lista de usuarios","url"=>""]
-          ]);
-  
-          $listaModelo = User::select('id','name','email')->paginate(5);
-  
-          return view('admin.usuarios.index',compact('listaMigalhas','listaModelo'));
+      $listaMigalhas = json_encode([
+        ["titulo"=>"Home","url"=>route('home')],
+        ["titulo"=>"Lista de Usuários","url"=>""]
+      ]);
 
+      $listaModelo = User::select('id','name','email')->paginate(5);
+
+
+      return view('admin.usuarios.index',compact('listaMigalhas','listaModelo'));
     }
 
     /**
@@ -46,22 +45,21 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $validacao = \Validator::make($data,[
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+      $data = $request->all();
+      $validacao = \Validator::make($data,[
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:6',
+      ]);
 
-        ]);
+      if($validacao->fails()){
+        return redirect()->back()->withErrors($validacao)->withInput();
+      }
 
-        if($validacao->fails()){
-          return redirect()->back()->withErrors($validacao)->withInput();
-        }
+      $data['password'] = bcrypt($data['password']);
 
-        $data['password'] = bcrypt($data['password']);
-
-        User::create($data);
-        return redirect()->back();
+      User::create($data);
+      return redirect()->back();
     }
 
     /**
@@ -95,36 +93,31 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+      $data = $request->all();
 
-        if(isset($data['password']) && $data['password'] != ""){
+      if(isset($data['password']) && $data['password'] != ""){
+        $validacao = \Validator::make($data,[
+          'name' => 'required|string|max:255',
+          'email' => ['required','string','email','max:255',Rule::unique('users')->ignore($id)],
+          'password' => 'required|string|min:6',
+        ]);
+        $data['password'] = bcrypt($data['password']);
+      }else{
+        $validacao = \Validator::make($data,[
+          'name' => 'required|string|max:255',
+          'email' => ['required','string','email','max:255',Rule::unique('users')->ignore($id)]
+        ]);
+        unset($data['password']);
+      }
 
-            $validacao = \Validator::make($data,[
-                'name' => 'required|string|max:255',
-                'email' => ['required', 'string','email','max:255',Rule::unique('users')->ignore($id)],
-                'password' => 'required|string|min:6',
-    
-            ]);
-            $data['password'] = bcrypt($data['password']);
 
 
-        }else{
-            $validacao = \Validator::make($data,[
-                'name' => 'required|string|max:255',
-                'email' => ['required', 'string','email','max:255',Rule::unique('users')->ignore($id)],
-    
-            ]);
-            unset($data['password']);
-        }
+      if($validacao->fails()){
+        return redirect()->back()->withErrors($validacao)->withInput();
+      }
 
-    
-  
-        if($validacao->fails()){
-          return redirect()->back()->withErrors($validacao)->withInput();
-        }
-  
-        User::find($id)->update($data);
-        return redirect()->back();
+      User::find($id)->update($data);
+      return redirect()->back();
     }
 
     /**
@@ -135,7 +128,7 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->back();
+      User::find($id)->delete();
+      return redirect()->back();
     }
 }
