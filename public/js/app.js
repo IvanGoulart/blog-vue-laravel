@@ -1391,7 +1391,7 @@ module.exports = __webpack_require__(76);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_Vuex__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(42);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -1403,7 +1403,7 @@ __webpack_require__(14);
 
 window.Vue = __webpack_require__(38);
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_Vuex__["a" /* default */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */]);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -1413,7 +1413,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_Vuex__["a" /* default */]);
 
 //Vuex
 
-var store = new __WEBPACK_IMPORTED_MODULE_0_Vuex__["a" /* default */].Store({
+var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
   state: {
     item: {}
   },
@@ -46187,7 +46187,7 @@ var content = __webpack_require__(48);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(11)("2591dd9e", content, false, {});
+var update = __webpack_require__(11)("a8514d84", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -46361,7 +46361,7 @@ var content = __webpack_require__(54);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(11)("9bb4ab7a", content, false, {});
+var update = __webpack_require__(11)("d51b8aba", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
